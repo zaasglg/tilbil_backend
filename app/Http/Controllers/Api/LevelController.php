@@ -21,8 +21,12 @@ class LevelController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:levels',
-            'description' => 'nullable|string',
+            'name_ru' => 'required|string|max:255',
+            'name_kk' => 'nullable|string|max:255',
+            'name_en' => 'nullable|string|max:255',
+            'description_ru' => 'nullable|string',
+            'description_kk' => 'nullable|string',
+            'description_en' => 'nullable|string',
         ]);
 
         $level = Level::create($request->all());
@@ -47,8 +51,12 @@ class LevelController extends Controller
     public function update(Request $request, Level $level)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:levels,name,' . $level->id,
-            'description' => 'nullable|string',
+            'name_ru' => 'required|string|max:255',
+            'name_kk' => 'nullable|string|max:255',
+            'name_en' => 'nullable|string|max:255',
+            'description_ru' => 'nullable|string',
+            'description_kk' => 'nullable|string',
+            'description_en' => 'nullable|string',
         ]);
 
         $level->update($request->all());

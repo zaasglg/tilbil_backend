@@ -28,9 +28,13 @@ class LessonController extends Controller
     {
         $request->validate([
             'course_id' => 'required|exists:courses,id',
-            'title' => 'required|string|max:255',
+            'title_ru' => 'required|string|max:255',
+            'title_kk' => 'nullable|string|max:255',
+            'title_en' => 'nullable|string|max:255',
             'type' => 'required|in:text,video,audio,quiz,practice',
-            'content' => 'nullable|string',
+            'content_ru' => 'nullable|string',
+            'content_kk' => 'nullable|string',
+            'content_en' => 'nullable|string',
             'audio_url' => 'nullable|string|max:255',
             'video_url' => 'nullable|string|max:255',
             'order' => 'required|integer|min:0',
@@ -60,9 +64,13 @@ class LessonController extends Controller
     {
         $request->validate([
             'course_id' => 'required|exists:courses,id',
-            'title' => 'required|string|max:255',
+            'title_ru' => 'required|string|max:255',
+            'title_kk' => 'nullable|string|max:255',
+            'title_en' => 'nullable|string|max:255',
             'type' => 'required|in:text,video,audio,quiz,practice',
-            'content' => 'nullable|string',
+            'content_ru' => 'nullable|string',
+            'content_kk' => 'nullable|string',
+            'content_en' => 'nullable|string',
             'audio_url' => 'nullable|string|max:255',
             'video_url' => 'nullable|string|max:255',
             'order' => 'required|integer|min:0',

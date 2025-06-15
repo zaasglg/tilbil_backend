@@ -10,6 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -39,16 +40,6 @@ class AchievementResource extends Resource
                     ->maxLength(255)
                     ->label('Код')
                     ->placeholder('first_lesson_completed'),
-                TextInput::make('title')
-                    ->required()
-                    ->maxLength(255)
-                    ->label('Название')
-                    ->placeholder('Первый урок завершен'),
-                Textarea::make('description')
-                    ->required()
-                    ->maxLength(65535)
-                    ->label('Описание')
-                    ->placeholder('Завершите свой первый урок'),
                 FileUpload::make('icon_url')
                     ->image()
                     ->directory('achievements/icons')
@@ -79,6 +70,40 @@ class AchievementResource extends Resource
                         'dictionary_hero' => 'Например: words_count = 100',
                         default => ''
                     }),
+                Tabs::make('Переводы')
+                    ->tabs([
+                        Tabs\Tab::make('Русский')
+                            ->schema([
+                                TextInput::make('title_ru')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->label('Название')
+                                    ->placeholder('Первый урок завершен'),
+                                Textarea::make('description_ru')
+                                    ->required()
+                                    ->maxLength(65535)
+                                    ->label('Описание')
+                                    ->placeholder('Завершите свой первый урок'),
+                            ]),
+                        Tabs\Tab::make('Казахский')
+                            ->schema([
+                                TextInput::make('title_kk')
+                                    ->maxLength(255)
+                                    ->label('Название'),
+                                Textarea::make('description_kk')
+                                    ->maxLength(65535)
+                                    ->label('Описание'),
+                            ]),
+                        Tabs\Tab::make('Английский')
+                            ->schema([
+                                TextInput::make('title_en')
+                                    ->maxLength(255)
+                                    ->label('Название'),
+                                Textarea::make('description_en')
+                                    ->maxLength(65535)
+                                    ->label('Описание'),
+                            ]),
+                    ]),
             ]);
     }
 
@@ -90,7 +115,7 @@ class AchievementResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('Код'),
-                Tables\Columns\TextColumn::make('title')
+                Tables\Columns\TextColumn::make('title_ru')
                     ->searchable()
                     ->sortable()
                     ->label('Название'),

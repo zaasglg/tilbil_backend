@@ -9,8 +9,8 @@ class Achievement extends Model
 {
     protected $fillable = [
         'code',
-        'title',
-        'description',
+        'title_ru', 'title_kk', 'title_en',
+        'description_ru', 'description_kk', 'description_en',
         'icon_url',
         'type',
         'criteria',
@@ -19,6 +19,24 @@ class Achievement extends Model
     protected $casts = [
         'criteria' => 'array',
     ];
+
+    /**
+     * Get localized title
+     */
+    public function getTitleAttribute()
+    {
+        $locale = app()->getLocale();
+        return $this->{"title_$locale"} ?? $this->title_ru;
+    }
+
+    /**
+     * Get localized description
+     */
+    public function getDescriptionAttribute()
+    {
+        $locale = app()->getLocale();
+        return $this->{"description_$locale"} ?? $this->description_ru;
+    }
 
     /**
      * Users who have earned this achievement

@@ -10,6 +10,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Tabs;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -33,12 +34,9 @@ class QuizResource extends Resource
         return $form
             ->schema([
                 Select::make('lesson_id')
-                    ->relationship('lesson', 'title')
+                    ->relationship('lesson', 'title_ru')
                     ->required()
                     ->label('Урок'),
-                Textarea::make('question_text')
-                    ->required()
-                    ->label('Текст вопроса'),
                 Select::make('question_type')
                     ->options([
                         'multiple' => 'Множественный выбор',
@@ -48,19 +46,60 @@ class QuizResource extends Resource
                     ])
                     ->required()
                     ->label('Тип вопроса'),
-                Repeater::make('options')
-                    ->schema([
-                        TextInput::make('option')
-                            ->required()
-                            ->label('Вариант ответа'),
-                    ])
-                    ->label('Варианты ответов')
-                    ->minItems(2)
-                    ->defaultItems(4)
-                    ->columns(2),
-                TextInput::make('correct_answer')
-                    ->required()
-                    ->label('Правильный ответ'),
+                Tabs::make('Переводы')
+                    ->tabs([
+                        Tabs\Tab::make('Русский')
+                            ->schema([
+                                Textarea::make('question_text_ru')
+                                    ->required()
+                                    ->label('Текст вопроса'),
+                                Repeater::make('options_ru')
+                                    ->schema([
+                                        TextInput::make('option')
+                                            ->required()
+                                            ->label('Вариант ответа'),
+                                    ])
+                                    ->label('Варианты ответов')
+                                    ->minItems(2)
+                                    ->defaultItems(4)
+                                    ->columns(2),
+                                TextInput::make('correct_answer_ru')
+                                    ->required()
+                                    ->label('Правильный ответ'),
+                            ]),
+                        Tabs\Tab::make('Казахский')
+                            ->schema([
+                                Textarea::make('question_text_kk')
+                                    ->label('Текст вопроса'),
+                                Repeater::make('options_kk')
+                                    ->schema([
+                                        TextInput::make('option')
+                                            ->label('Вариант ответа'),
+                                    ])
+                                    ->label('Варианты ответов')
+                                    ->minItems(2)
+                                    ->defaultItems(4)
+                                    ->columns(2),
+                                TextInput::make('correct_answer_kk')
+                                    ->label('Правильный ответ'),
+                            ]),
+                        Tabs\Tab::make('Английский')
+                            ->schema([
+                                Textarea::make('question_text_en')
+                                    ->label('Текст вопроса'),
+                                Repeater::make('options_en')
+                                    ->schema([
+                                        TextInput::make('option')
+                                            ->label('Вариант ответа'),
+                                    ])
+                                    ->label('Варианты ответов')
+                                    ->minItems(2)
+                                    ->defaultItems(4)
+                                    ->columns(2),
+                                TextInput::make('correct_answer_en')
+                                    ->label('Правильный ответ'),
+                            ]),
+                    ]),
             ]);
     }
 
@@ -68,11 +107,11 @@ class QuizResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('lesson.title')
+                Tables\Columns\TextColumn::make('lesson.title_ru')
                     ->sortable()
                     ->searchable()
                     ->label('Урок'),
-                Tables\Columns\TextColumn::make('question_text')
+                Tables\Columns\TextColumn::make('question_text_ru')
                     ->searchable()
                     ->limit(50)
                     ->label('Вопрос'),

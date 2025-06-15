@@ -28,8 +28,12 @@ class CourseController extends Controller
     {
         $request->validate([
             'level_id' => 'required|exists:levels,id',
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'title_ru' => 'required|string|max:255',
+            'title_kk' => 'nullable|string|max:255',
+            'title_en' => 'nullable|string|max:255',
+            'description_ru' => 'nullable|string',
+            'description_kk' => 'nullable|string',
+            'description_en' => 'nullable|string',
             'order' => 'required|integer|min:0',
         ]);
 
@@ -59,8 +63,12 @@ class CourseController extends Controller
     {
         $request->validate([
             'level_id' => 'required|exists:levels,id',
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'title_ru' => 'required|string|max:255',
+            'title_kk' => 'nullable|string|max:255',
+            'title_en' => 'nullable|string|max:255',
+            'description_ru' => 'nullable|string',
+            'description_kk' => 'nullable|string',
+            'description_en' => 'nullable|string',
             'order' => 'required|integer|min:0',
         ]);
 

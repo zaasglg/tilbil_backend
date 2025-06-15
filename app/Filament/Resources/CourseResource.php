@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Tabs;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -33,21 +34,45 @@ class CourseResource extends Resource
         return $form
             ->schema([
                 Select::make('level_id')
-                    ->relationship('level', 'name')
+                    ->relationship('level', 'name_ru')
                     ->required()
                     ->label('Уровень'),
-                TextInput::make('title')
-                    ->required()
-                    ->maxLength(255)
-                    ->label('Название'),
-                RichEditor::make('description')
-                    ->maxLength(65535)
-                    ->label('Описание'),
                 TextInput::make('order')
                     ->numeric()
                     ->default(0)
                     ->required()
                     ->label('Порядок'),
+                Tabs::make('Переводы')
+                    ->tabs([
+                        Tabs\Tab::make('Русский')
+                            ->schema([
+                                TextInput::make('title_ru')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->label('Название'),
+                                RichEditor::make('description_ru')
+                                    ->maxLength(65535)
+                                    ->label('Описание'),
+                            ]),
+                        Tabs\Tab::make('Казахский')
+                            ->schema([
+                                TextInput::make('title_kk')
+                                    ->maxLength(255)
+                                    ->label('Название'),
+                                RichEditor::make('description_kk')
+                                    ->maxLength(65535)
+                                    ->label('Описание'),
+                            ]),
+                        Tabs\Tab::make('Английский')
+                            ->schema([
+                                TextInput::make('title_en')
+                                    ->maxLength(255)
+                                    ->label('Название'),
+                                RichEditor::make('description_en')
+                                    ->maxLength(65535)
+                                    ->label('Описание'),
+                            ]),
+                    ]),
             ]);
     }
 
@@ -55,11 +80,11 @@ class CourseResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('level.name')
+                Tables\Columns\TextColumn::make('level.name_ru')
                     ->sortable()
                     ->searchable()
                     ->label('Уровень'),
-                Tables\Columns\TextColumn::make('title')
+                Tables\Columns\TextColumn::make('title_ru')
                     ->searchable()
                     ->label('Название'),
                 Tables\Columns\TextColumn::make('order')
