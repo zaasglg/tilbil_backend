@@ -118,7 +118,15 @@ class AchievementResource extends Resource
                 Tables\Columns\TextColumn::make('title_ru')
                     ->searchable()
                     ->sortable()
-                    ->label('Название'),
+                    ->label('Название (РУ)'),
+                Tables\Columns\TextColumn::make('title_kk')
+                    ->searchable()
+                    ->label('Название (КК)')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('title_en')
+                    ->searchable()
+                    ->label('Название (EN)')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 ImageColumn::make('icon_url')
                     ->circular()
                     ->label('Иконка'),

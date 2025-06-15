@@ -37,17 +37,17 @@ class UserProgressResource extends Resource
                     ->searchable()
                     ->label('Пользователь'),
                 Select::make('level_id')
-                    ->relationship('level', 'name')
+                    ->relationship('level', 'name_ru')
                     ->required()
                     ->searchable()
                     ->label('Уровень'),
                 Select::make('course_id')
-                    ->relationship('course', 'title')
+                    ->relationship('course', 'title_ru')
                     ->required()
                     ->searchable()
                     ->label('Курс'),
                 Select::make('lesson_id')
-                    ->relationship('lesson', 'title')
+                    ->relationship('lesson', 'title_ru')
                     ->required()
                     ->searchable()
                     ->label('Урок'),
@@ -77,15 +77,15 @@ class UserProgressResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->label('Пользователь'),
-                Tables\Columns\TextColumn::make('level.name')
+                Tables\Columns\TextColumn::make('level.name_ru')
                     ->sortable()
                     ->searchable()
                     ->label('Уровень'),
-                Tables\Columns\TextColumn::make('course.title')
+                Tables\Columns\TextColumn::make('course.title_ru')
                     ->sortable()
                     ->searchable()
                     ->label('Курс'),
-                Tables\Columns\TextColumn::make('lesson.title')
+                Tables\Columns\TextColumn::make('lesson.title_ru')
                     ->sortable()
                     ->searchable()
                     ->label('Урок'),
@@ -111,10 +111,10 @@ class UserProgressResource extends Resource
                     ])
                     ->label('Статус'),
                 SelectFilter::make('level')
-                    ->relationship('level', 'name')
+                    ->relationship('level', 'name_ru')
                     ->label('Уровень'),
                 SelectFilter::make('course')
-                    ->relationship('course', 'title')
+                    ->relationship('course', 'title_ru')
                     ->label('Курс'),
             ])
             ->actions([

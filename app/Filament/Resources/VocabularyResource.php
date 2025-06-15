@@ -32,7 +32,7 @@ class VocabularyResource extends Resource
         return $form
             ->schema([
                 Select::make('lesson_id')
-                    ->relationship('lesson', 'title')
+                    ->relationship('lesson', 'title_ru')
                     ->required()
                     ->label('Урок'),
                 TextInput::make('word_kz')
@@ -85,7 +85,7 @@ class VocabularyResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('lesson.title')
+                Tables\Columns\TextColumn::make('lesson.title_ru')
                     ->sortable()
                     ->searchable()
                     ->label('Урок'),
