@@ -10,10 +10,15 @@ use App\Http\Controllers\Api\VocabularyController;
 use App\Http\Controllers\Api\QuizController;
 use App\Http\Controllers\Api\UserProgressController;
 use App\Http\Controllers\Api\AchievementController;
+use App\Http\Controllers\Api\GoogleAuthController;
 
 // Public routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+// Google OAuth routes
+Route::post('/auth/google', [GoogleAuthController::class, 'handleGoogleAuth']);
+Route::post('/auth/google/id-token', [GoogleAuthController::class, 'handleGoogleIdToken']);
 
 // Public read-only routes for learning content
 Route::get('/levels', [LevelController::class, 'index']);
@@ -35,6 +40,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'profile']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/profile/update', [AuthController::class, 'updateProfile']);
+    
+    // Google OAuth routes
+    Route::post('/auth/google/unlink', [GoogleAuthController::class, 'unlinkGoogle']);
     
     // User Progress routes
     Route::get('/progress', [UserProgressController::class, 'index']);
